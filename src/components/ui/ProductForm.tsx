@@ -4,20 +4,20 @@ import { Input } from "./input";
 import { useNavigate } from "@tanstack/react-router";
 interface ProductFormProps {
   product?: {
+    _id:string;
     name: string;
-    category: string;
-    price: number;
-    stock: number;
     description: string;
-    imageUrl: string;
+    price: number;
+    category: string;
+    stock: number;
   };
 }
 
-/* productform component object oladi 
-* agar qiyat kelsa edit, qiymat kelmasa 
-* create sifatida ishlaydi 
-* 
-* */
+/* productform component object oladi
+ * agar qiyat kelsa edit, qiymat kelmasa
+ * create sifatida ishlaydi
+ *
+ * */
 export default function ProductForm({ product = undefined }: ProductFormProps) {
   const navigate = useNavigate();
   const isEditMode = product !== undefined;
@@ -62,7 +62,7 @@ export default function ProductForm({ product = undefined }: ProductFormProps) {
         <div className="space-y-2">
           <label className="text-sm font-medium">Description</label>
           <textarea
-            className="min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            className="min-h-30 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             placeholder="Tell us about this product..."
           />
         </div>

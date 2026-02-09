@@ -17,6 +17,7 @@ import { Route as AuthenticatedProductsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedOrderRouteImport } from './routes/_authenticated/order'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCreateRouteImport } from './routes/_authenticated/create'
+import { Route as AuthenticatedProductIdEditRouteImport } from './routes/_authenticated/product.$id.edit'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -57,6 +58,12 @@ const AuthenticatedCreateRoute = AuthenticatedCreateRouteImport.update({
   path: '/create',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedProductIdEditRoute =
+  AuthenticatedProductIdEditRouteImport.update({
+    id: '/product/$id/edit',
+    path: '/product/$id/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/order': typeof AuthenticatedOrderRoute
   '/products': typeof AuthenticatedProductsRoute
   '/users': typeof AuthenticatedUsersRoute
+  '/product/$id/edit': typeof AuthenticatedProductIdEditRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -75,6 +83,7 @@ export interface FileRoutesByTo {
   '/products': typeof AuthenticatedProductsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/': typeof AuthenticatedIndexRoute
+  '/product/$id/edit': typeof AuthenticatedProductIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,6 +95,7 @@ export interface FileRoutesById {
   '/_authenticated/products': typeof AuthenticatedProductsRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/product/$id/edit': typeof AuthenticatedProductIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/order'
     | '/products'
     | '/users'
+    | '/product/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/products'
     | '/users'
     | '/'
+    | '/product/$id/edit'
   id:
     | '__root__'
     | '/_authenticated'
@@ -116,6 +128,7 @@ export interface FileRouteTypes {
     | '/_authenticated/products'
     | '/_authenticated/users'
     | '/_authenticated/'
+    | '/_authenticated/product/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCreateRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/product/$id/edit': {
+      id: '/_authenticated/product/$id/edit'
+      path: '/product/$id/edit'
+      fullPath: '/product/$id/edit'
+      preLoaderRoute: typeof AuthenticatedProductIdEditRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
@@ -191,6 +211,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedProductsRoute: typeof AuthenticatedProductsRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedProductIdEditRoute: typeof AuthenticatedProductIdEditRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -200,6 +221,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedProductsRoute: AuthenticatedProductsRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedProductIdEditRoute: AuthenticatedProductIdEditRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
