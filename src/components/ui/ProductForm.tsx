@@ -2,15 +2,10 @@ import { Button } from "./button";
 import { ArrowLeft, Upload } from "lucide-react";
 import { Input } from "./input";
 import { useNavigate } from "@tanstack/react-router";
+import type { ProductType } from "@/types";
+
 interface ProductFormProps {
-  product?: {
-    _id:string;
-    name: string;
-    description: string;
-    price: number;
-    category: string;
-    stock: number;
-  };
+  product?: ProductType;
 }
 
 /* productform component object oladi
@@ -21,6 +16,7 @@ interface ProductFormProps {
 export default function ProductForm({ product = undefined }: ProductFormProps) {
   const navigate = useNavigate();
   const isEditMode = product !== undefined;
+
   return (
     <div className="mx-auto max-w-2xl space-y-8">
       <div className="flex items-center gap-4">
