@@ -5,4 +5,8 @@ export interface ProductType {
   price: number;
   category: string;
   stock: number;
+  endimage: string;
+  middleimage: string;
+  startimage: string;
+  status: "Active" | "Draft" | "Out of Stock";
 }

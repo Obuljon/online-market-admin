@@ -1,6 +1,5 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import {
-  BarChart3,
   LayersPlus,
   LayoutDashboard,
   Package,
@@ -15,7 +14,7 @@ export const Route = createFileRoute("/_authenticated")({
 function RouteComponent() {
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { id: "products", label: "Products", icon: Package },
+    { id: "products/1/8", label: "Products", icon: Package },
     { id: "order", label: "Orders", icon: ShoppingCart },
     { id: "users", label: "Users", icon: Users },
     // { id: "analytics", label: "Analytics", icon: BarChart3 },

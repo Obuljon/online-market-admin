@@ -16,6 +16,8 @@ interface ProductFormProps {
 export default function ProductForm({ product = undefined }: ProductFormProps) {
   const navigate = useNavigate();
   const isEditMode = product !== undefined;
+  
+
 
   return (
     <div className="mx-auto max-w-2xl space-y-8">
@@ -23,7 +25,7 @@ export default function ProductForm({ product = undefined }: ProductFormProps) {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => navigate({ to: "/products" })}
+          onClick={() => navigate({ to: "/products/1/10" })}
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>

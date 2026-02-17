@@ -13,10 +13,10 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
-import { Route as AuthenticatedProductsRouteImport } from './routes/_authenticated/products'
 import { Route as AuthenticatedOrderRouteImport } from './routes/_authenticated/order'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCreateRouteImport } from './routes/_authenticated/create'
+import { Route as AuthenticatedProductsPageLimitRouteImport } from './routes/_authenticated/products.$page.$limit'
 import { Route as AuthenticatedProductIdEditRouteImport } from './routes/_authenticated/product.$id.edit'
 
 const LoginRoute = LoginRouteImport.update({
@@ -38,11 +38,6 @@ const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedProductsRoute = AuthenticatedProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
 const AuthenticatedOrderRoute = AuthenticatedOrderRouteImport.update({
   id: '/order',
   path: '/order',
@@ -58,6 +53,12 @@ const AuthenticatedCreateRoute = AuthenticatedCreateRouteImport.update({
   path: '/create',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedProductsPageLimitRoute =
+  AuthenticatedProductsPageLimitRouteImport.update({
+    id: '/products/$page/$limit',
+    path: '/products/$page/$limit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedProductIdEditRoute =
   AuthenticatedProductIdEditRouteImport.update({
     id: '/product/$id/edit',
@@ -71,19 +72,19 @@ export interface FileRoutesByFullPath {
   '/create': typeof AuthenticatedCreateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/order': typeof AuthenticatedOrderRoute
-  '/products': typeof AuthenticatedProductsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/product/$id/edit': typeof AuthenticatedProductIdEditRoute
+  '/products/$page/$limit': typeof AuthenticatedProductsPageLimitRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/create': typeof AuthenticatedCreateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/order': typeof AuthenticatedOrderRoute
-  '/products': typeof AuthenticatedProductsRoute
   '/users': typeof AuthenticatedUsersRoute
   '/': typeof AuthenticatedIndexRoute
   '/product/$id/edit': typeof AuthenticatedProductIdEditRoute
+  '/products/$page/$limit': typeof AuthenticatedProductsPageLimitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -92,10 +93,10 @@ export interface FileRoutesById {
   '/_authenticated/create': typeof AuthenticatedCreateRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/order': typeof AuthenticatedOrderRoute
-  '/_authenticated/products': typeof AuthenticatedProductsRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/product/$id/edit': typeof AuthenticatedProductIdEditRoute
+  '/_authenticated/products/$page/$limit': typeof AuthenticatedProductsPageLimitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,19 +106,19 @@ export interface FileRouteTypes {
     | '/create'
     | '/dashboard'
     | '/order'
-    | '/products'
     | '/users'
     | '/product/$id/edit'
+    | '/products/$page/$limit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
     | '/create'
     | '/dashboard'
     | '/order'
-    | '/products'
     | '/users'
     | '/'
     | '/product/$id/edit'
+    | '/products/$page/$limit'
   id:
     | '__root__'
     | '/_authenticated'
@@ -125,10 +126,10 @@ export interface FileRouteTypes {
     | '/_authenticated/create'
     | '/_authenticated/dashboard'
     | '/_authenticated/order'
-    | '/_authenticated/products'
     | '/_authenticated/users'
     | '/_authenticated/'
     | '/_authenticated/product/$id/edit'
+    | '/_authenticated/products/$page/$limit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -166,13 +167,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/products': {
-      id: '/_authenticated/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof AuthenticatedProductsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
     '/_authenticated/order': {
       id: '/_authenticated/order'
       path: '/order'
@@ -194,6 +188,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCreateRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/products/$page/$limit': {
+      id: '/_authenticated/products/$page/$limit'
+      path: '/products/$page/$limit'
+      fullPath: '/products/$page/$limit'
+      preLoaderRoute: typeof AuthenticatedProductsPageLimitRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/product/$id/edit': {
       id: '/_authenticated/product/$id/edit'
       path: '/product/$id/edit'
@@ -208,20 +209,20 @@ interface AuthenticatedRouteChildren {
   AuthenticatedCreateRoute: typeof AuthenticatedCreateRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedOrderRoute: typeof AuthenticatedOrderRoute
-  AuthenticatedProductsRoute: typeof AuthenticatedProductsRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedProductIdEditRoute: typeof AuthenticatedProductIdEditRoute
+  AuthenticatedProductsPageLimitRoute: typeof AuthenticatedProductsPageLimitRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedCreateRoute: AuthenticatedCreateRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedOrderRoute: AuthenticatedOrderRoute,
-  AuthenticatedProductsRoute: AuthenticatedProductsRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedProductIdEditRoute: AuthenticatedProductIdEditRoute,
+  AuthenticatedProductsPageLimitRoute: AuthenticatedProductsPageLimitRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
